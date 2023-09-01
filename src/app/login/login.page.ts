@@ -19,7 +19,7 @@ export class LoginPage implements OnInit {
   constructor(public fb: FormBuilder, public alertController: AlertController) {
 
     this.formularioLogin = this.fb.group({
-      'nombre': new FormControl("",Validators.required),
+      'Usuario': new FormControl("",Validators.required),
       'password': new FormControl("",Validators.required)
     });
   
@@ -33,7 +33,7 @@ export class LoginPage implements OnInit {
     var usuarioString = localStorage.getItem('usuario');
     if (usuarioString !== null) {
       var usuario = JSON.parse(usuarioString);
-      if (usuario.nombre == f.nombre && usuario.password == f.password) {
+      if (usuario.Usuario == f.Usuario && usuario.password == f.password) {
         console.log('Ingresado');
         localStorage.setItem('ingresado', 'true');
       } else {
