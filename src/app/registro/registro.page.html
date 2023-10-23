@@ -39,6 +39,22 @@
       <ion-input [(ngModel)]="rut" type="text"></ion-input>
     </ion-item>
 
+    <!-- Selección de Región -->
+    <ion-item>
+      <ion-label position="stacked">Región</ion-label>
+      <ion-select [(ngModel)]="region" (ionChange)="onRegionChange()">
+        <ion-select-option *ngFor="let reg of regiones" [value]="reg.id">{{ reg.nombre }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    
+    <!-- Selección de Comuna (se muestra solo cuando se ha seleccionado una región) -->
+    <ion-item *ngIf="region">
+      <ion-label position="stacked">Comuna</ion-label>
+      <ion-select [(ngModel)]="comuna">
+        <ion-select-option *ngFor="let com of comunas" [value]="com.id">{{ com.nombre }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
     <ion-button expand="full" (click)="register()">Registrarse</ion-button>
   </div>
 </ion-content>

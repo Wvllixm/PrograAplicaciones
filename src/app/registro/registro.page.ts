@@ -1,6 +1,10 @@
+import { ComunaService } from './../services/comuna.service';
+import { RegionesService } from '../services/regiones.service';
+
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-registro',
@@ -12,8 +16,15 @@ export class RegistroPage {
   apellido: string = '';
   carrera: string = '';
   rut: string = '';
+  region: number = 0;
+  comuna: number = 0;
 
-  constructor(private router: Router, private alertController: AlertController) {}
+  regiones: { id: number; nombre: string }[] = [];
+  comunas: { id: number; nombre: string }[] = [];
+
+  regionSeleccionada: any;
+
+  constructor(private router: Router, private alertController: AlertController, private regionesService: RegionesService,private http: HttpClient, private comunaService: ComunaService) {}
 
   async register() {
     if (this.nombre && this.apellido && this.carrera && this.rut) {
@@ -53,5 +64,31 @@ export class RegistroPage {
     }
   }
 
+  //Trae las region de la api
+  async ionViewWillEnter() {
+    this.regionesService.getDatos().subscribe(
+      (data: any) => {
+        this.regiones = data.data;
+      },
+      (error) => {
+        console.error('Error al obtener las regiones desde la API: ', error);
+      }
+    );
+  }
+
+
+//obtiene las comunas de la api
+  onRegionChange() {
+    if (this.region) {
+      this.comunaService.getComunas(this.region).subscribe(
+        (data: any) => {
+          this.comunas = data.data;
+        },
+        (error) => {
+          console.error('Error al obtener las comunas desde la API: ', error);
+        }
+      );
+    }
+  }
 
 }
