@@ -1,14 +1,25 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" class="header-animation">
   <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title>Inicio</ion-title>
+    <ion-title>
+      Iniciar Sesión
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <h1> Bienvenido!</h1>
-  
-  <h1>Queremos saber mas sobre ti!!</h1>
+  <div id="containerr" class="ion-padding">
+    <ion-item>
+      <ion-label position="stacked">Nombre de Usuario</ion-label>
+      <ion-icon name="person" slot="start"></ion-icon>
+      <ion-input [(ngModel)]="username" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Contraseña</ion-label>
+      <ion-icon name="lock-closed" slot="start"></ion-icon>
+      <ion-input [(ngModel)]="password" type="password"></ion-input>
+    </ion-item>
+    <ion-button expand="full" (click)="login()">Ingresar</ion-button>
+    <ion-button expand="full" (click)="register()">Registrarse</ion-button>
+    <p>¿Olvidaste tu contraseña? <a (click)="recuperarContrasena()">Recuperar</a></p>
+  </div>
 </ion-content>

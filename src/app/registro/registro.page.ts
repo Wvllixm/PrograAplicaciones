@@ -1,55 +1,57 @@
-import { Component, OnInit } from '@angular/core';
-import {
-  FormGroup,
-  FormControl,
-  Validators,
-  FormBuilder
-} from '@angular/forms';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-registro',
-  templateUrl: './registro.page.html',
-  styleUrls: ['./registro.page.scss'],
+  templateUrl: 'registro.page.html',
+  styleUrls: ['registro.page.scss'],
 })
-export class RegistroPage implements OnInit {
+export class RegistroPage {
+  nombre: string = '';
+  apellido: string = '';
+  carrera: string = '';
+  rut: string = '';
+
+  constructor(private router: Router, private alertController: AlertController) {}
+
+  async register() {
+    if (this.nombre && this.apellido && this.carrera && this.rut) {
+
+      const nombreUsuario = this.nombre.substring(0, 2) + this.apellido.substring(0, 1) + this.rut.substring(0, 2);
+
+      const password = this.rut.substring(0, 4);
   
-  formularioRegistro: FormGroup;
+      const alumno = {
+        nombre: this.nombre,
+        apellido: this.apellido,
+        carrera: this.carrera,
+        rut: this.rut,
+        nombreUsuario: nombreUsuario,
+        password: password,
+      };
+  
+      localStorage.setItem('alumno', JSON.stringify(alumno));
 
-  constructor(public fb: FormBuilder, public alertController: AlertController) { 
-
-    this.formularioRegistro = this.fb.group({
-      'Usuario': new FormControl("",Validators.required),
-      'password': new FormControl("",Validators.required),
-      'confirmacionPassword': new  FormControl("",Validators.required)
-    });
-
-  }
-
-  ngOnInit() {
-  }
-
-  async guardar(){
-    var f = this.formularioRegistro.value;
-
-    if(this.formularioRegistro.invalid){
+      const mensaje = `Tu nombre de usuario es: ${nombreUsuario}\nTu contraseña es: ${password}`;
       const alert = await this.alertController.create({
-        header: 'Datos incompletos',
-        message: 'Tienes que llenar todos los datos.',
-        buttons: ['Aceptar']
+        header: 'Registro Exitoso',
+        message: mensaje,
+        buttons: [
+          {
+            text: 'OK',
+            handler: () => {
+              this.router.navigate(['/home']);
+            },
+          },
+        ],
       });
 
       await alert.present();
-      return;
+    } else {
+      console.error('Faltan datos obligatorios para el registro.');
     }
-
-    var usuario = {
-      Usuario: f.Usuario,
-      password: f.password
-    }
-
-    localStorage.setItem('usuario',JSON.stringify(usuario))
-
   }
+
 
 }
