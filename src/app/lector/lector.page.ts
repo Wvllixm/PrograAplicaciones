@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { BrowserMultiFormatReader, Result, BarcodeFormat } from '@zxing/library';
+import { Camera, CameraResultType, CameraSource} from '@capacitor/camera';
 
 @Component({
   selector: 'app-lector',
@@ -22,8 +23,13 @@ export class LectorPage implements OnInit {
     apellido: '',
     escuela: '',
     carrera: '',
-    rut: '',
+    rut: ''
   };// Inicializa 'userData' con propiedades predeterminadas
+
+  latitude: number = 0; // Valor inicial
+  longitude: number = 0; // Valor inicial
+
+  imageSource: any
 
   @ViewChild('videoElement', { static: true }) videoElement: ElementRef | undefined;
 
@@ -93,4 +99,16 @@ export class LectorPage implements OnInit {
       };
     }
   }
+
+  takePicture = async () => {
+    const image = await Camera.getPhoto({
+      quality: 90,
+      allowEditing: false,
+      resultType: CameraResultType.DataUrl,
+      source: CameraSource.Prompt
+    });
+
+    this.imageSource=image.dataUrl;
+  }
+
 }

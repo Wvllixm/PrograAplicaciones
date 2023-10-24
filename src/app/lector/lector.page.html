@@ -22,9 +22,15 @@
       <p>Nombre: {{ userData.nombre }}</p>
       <p>Apellido: {{ userData.apellido }}</p>
       <p>Rut: {{ userData.rut }}</p>
+      <p>Carrera: {{ userData.carrera }}</p>
       <ul>
         <li *ngFor="let dato of userData.datosEscaneados">{{ dato }}</li>
       </ul>
+    </div>
+
+    <div id="containerCam">
+      <img src="{{ imageSource }}" style="width: 400px;">
+      <ion-button (click)="takePicture()">Camera</ion-button>
     </div>
   </div>
 </ion-content>

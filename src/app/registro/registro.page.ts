@@ -66,6 +66,14 @@ export class RegistroPage {
 
   //Trae las region de la api
   async ionViewWillEnter() {
+
+    const localizacion = {
+      region: this.region,
+      comuna: this.comuna
+    };
+
+    localStorage.setItem('localizacion', JSON.stringify(localizacion));
+
     this.regionesService.getDatos().subscribe(
       (data: any) => {
         this.regiones = data.data;
