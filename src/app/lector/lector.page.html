@@ -17,6 +17,19 @@
       <video #videoElement autoplay="true"></video>
     </div>
 
+    <ion-button expand="full" (click)="closeScanner()">Cerrar Escáner de QR</ion-button>
+
+    <div class="ion-padding" style="text-align: center;">
+      <ion-label>Latitud {{ latitud }}</ion-label>
+    </div>
+  
+    <div class="ion-padding" style="text-align: center;">
+      <ion-label>Longitud {{ longitud }}</ion-label>
+    </div>
+    <ion-button expand="full" (click)="obtenerCoordenadas()">Obtener tus Coordenadas</ion-button>
+  
+
+
     <div *ngIf="userData && !isScanning">
       <h2>Información de la clase:</h2>
       <p>Nombre: {{ userData.nombre }}</p>
