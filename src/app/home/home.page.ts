@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +11,8 @@ export class HomePage {
   username: string = ''; // Variable para el nombre de usuario
   password: string = ''; // Variable para la contraseña
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, 
+              private storage: StorageService) {}
 
   login() {
     // Recupera los datos del alumno almacenados en el LocalStorage
