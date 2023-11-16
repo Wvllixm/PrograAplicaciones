@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color="primary">
+  <ion-toolbar color="tertiary">
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -54,7 +54,7 @@
         <ion-select-option *ngFor="let com of comunas" [value]="com.id">{{ com.nombre }}</ion-select-option>
       </ion-select>
     </ion-item>
-
-    <ion-button expand="full" (click)="register()">Registrarse</ion-button>
+    <br>
+    <ion-button expand="full" (click)="register()" color="tertiary">Registrarse</ion-button>
   </div>
 </ion-content>
