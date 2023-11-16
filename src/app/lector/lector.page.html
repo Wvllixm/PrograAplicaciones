@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color="primary">
+  <ion-toolbar color="tertiary">
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -11,13 +11,13 @@
 
 <ion-content>
   <div id="container" class="ion-padding">
-    <ion-button expand="full" (click)="openScanner()">Abrir Escáner de QR</ion-button>
+    <ion-button expand="full" (click)="openScanner()" color="tertiary">Abrir Escáner de QR</ion-button>
 
     <div id="videoContainer" [ngClass]="{ 'hide-result': isScanning }">
       <video #videoElement autoplay="true"></video>
     </div>
 
-    <ion-button expand="full" (click)="closeScanner()">Cerrar Escáner de QR</ion-button>
+    <ion-button expand="full" (click)="closeScanner()" color="tertiary">Cerrar Escáner de QR</ion-button>
 
     <div class="ion-padding" style="text-align: center;">
       <ion-label>Latitud {{ latitud }}</ion-label>
@@ -26,7 +26,7 @@
     <div class="ion-padding" style="text-align: center;">
       <ion-label>Longitud {{ longitud }}</ion-label>
     </div>
-    <ion-button expand="full" (click)="obtenerCoordenadas()">Obtener tus Coordenadas</ion-button>
+    <ion-button expand="full" (click)="obtenerCoordenadas()" color="tertiary">Obtener tus Coordenadas</ion-button>
   
 
 
@@ -43,7 +43,7 @@
 
     <div id="containerCam">
       <img src="{{ imageSource }}" style="width: 400px;">
-      <ion-button (click)="takePicture()">Camera</ion-button>
+      <ion-button (click)="takePicture()" color="tertiary">Camera</ion-button>
     </div>
   </div>
 </ion-content>
